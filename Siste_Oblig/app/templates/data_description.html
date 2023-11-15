@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <input type="file" name="inputfile"
+            id="inputfile">
+    <br>
+    
+    <pre id="output"></pre>
+      
+    <script type="text/javascript">
+      
+        document.getElementById('inputfile')
+            .addEventListener('change', function() {
+              
+            var fr=new FileReader();
+
+         
+            
+            fr.onload=function(){
+                document.getElementById('output')
+                        .textContent=fr.result;
+            }
+            console.log(this.files[0].mozFullPath)
+            fr.readAsText(this.files[0]);
+
+        })
+
+        console.log(document.getElementById('inputfile').value)
+    </script>
+</body>
+</html>

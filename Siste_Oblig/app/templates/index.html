@@ -1,0 +1,54 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}HousingPriceApp{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button"
+             class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url_for('index') }}">HousingPriceApp</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('dashboard') }}">Data dashboard</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+
+<div class='container'>
+    <p>Predict the house price in Ames, Iowa by filling out the below information. The data is fed to a 
+        machine learning model trained on historical data.</p>
+    <p>You can find a detailed description of the different data you have to submit <a href="https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/data">here</a>.</p>
+    <p>Select "nan"/"NA" or "Other" if none of the options apply to your house.</p>
+    <br>
+</div>
+
+<div class='container'>
+    {{ wtf.quick_form(form) }}
+</div>
+
+<div class='container'>
+    <h3>{% if session.get('pred') %} The predicted price of this house is {{session.get('pred')['pred']}}.</h3>
+
+    <h4>Model Score: {{session.get('pred')['score']}}
+         {% else %} {% endif %}</h4>
+    <br>
+    <h4>User information: {{session.get('user_info')}}</h4>
+
+</div>
+
+{% endblock %}
